@@ -43,10 +43,10 @@ const getAllNotesHandler = () => ({
 });
 const getNoteByIdHandler = (request, h) => {
   const { id } = request.params;
- 
+
   const note = notes.filter((n) => n.id === id)[0];
- 
- if (note !== undefined) {
+
+  if (note !== undefined) {
     return {
       status: 'success',
       data: {
@@ -54,7 +54,7 @@ const getNoteByIdHandler = (request, h) => {
       },
     };
   }
- 
+
   const response = h.response({
     status: 'fail',
     message: 'Catatan tidak ditemukan',
@@ -64,7 +64,6 @@ const getNoteByIdHandler = (request, h) => {
 };
 const editNoteByIdHandler = (request, h) => {
   const { id } = request.params;
-  console.log('DAFDFDSF');
   const { title, tags, body } = request.payload;
   const updatedAt = new Date().toISOString();
 
@@ -95,27 +94,29 @@ const editNoteByIdHandler = (request, h) => {
 };
 
 const deleteNoteByIdHandler = (request, h) => {
-    const { id } = request.params;
-   
-    const index = notes.findIndex((note) => note.id === id);
-   
-    if (index !== -1) {
-      notes.splice(index, 1);
-      const response = h.response({
-        status: 'success',
-        message: 'Catatan berhasil dihapus',
-      });
-      response.code(200);
-      return response;
-    }
-   
-   const response = h.response({
-      status: 'fail',
-      message: 'Catatan gagal dihapus. Id tidak ditemukan',
-    });
-    response.code(404);
-    return response;
-};
-   
+  const { id } = request.params;
 
-module.exports = { addNoteHandler, getAllNotesHandler, editNoteByIdHandler, deleteNoteByIdHandler, getNoteByIdHandler };
+  const index = notes.findIndex((note) => note.id === id);
+
+  if (index !== -1) {
+    notes.splice(index, 1);
+    const response = h.response({
+      status: 'success',
+      message: 'Catatan berhasil dihapus',
+    });
+    response.code(200);
+    return response;
+  }
+
+  const response = h.response({
+    status: 'fail',
+    message: 'Catatan gagal dihapus. Id tidak ditemukan',
+  });
+  response.code(404);
+  return response;
+};
+
+module.exports = {
+  // eslint-disable-next-line max-len
+  addNoteHandler, getAllNotesHandler, editNoteByIdHandler, deleteNoteByIdHandler, getNoteByIdHandler,
+};

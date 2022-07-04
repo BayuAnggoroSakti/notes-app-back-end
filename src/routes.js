@@ -1,4 +1,7 @@
-const { addNoteHandler, getAllNotesHandler, editNoteByIdHandler, deleteNoteByIdHandler, getNoteByIdHandler } = require('./handler');
+const {
+  // eslint-disable-next-line max-len
+  addNoteHandler, getAllNotesHandler, editNoteByIdHandler, deleteNoteByIdHandler, getNoteByIdHandler,
+} = require('./handler');
 
 const routes = [
   {
@@ -14,7 +17,7 @@ const routes = [
   {
     method: 'GET',
     path: '/notes/{id}',
-    handler:getNoteByIdHandler,
+    handler: getNoteByIdHandler,
   },
   {
     method: 'PUT',
